@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title>Товары</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="products.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.71/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.71/vfs_fonts.js"></script>
+
+</head>
+<body>
+
+<h1>Товары</h1>
+
+<div id="filters">
+    <label for="nameFilter">Наименование:
+        <input type="text" id="nameFilter">
+    </label>
+
+    <label for="typeFilter">Тип:
+        <select id="typeFilter">
+            <option value="None">Не указано</option>
+        </select>
+    </label>
+
+    <label for="manufacturerFilter">Производитель:
+        <select id="manufacturerFilter">
+            <option value="None">Не указано</option>
+        </select>
+    </label>
+
+    <label for="minPriceFilter">Минимальная цена:
+        <input type="number" id="minPriceFilter">
+    </label>
+
+    <label for="maxPriceFilter">Максимальная цена:
+        <input type="number" id="maxPriceFilter">
+    </label>
+
+    <div class="button-container">
+        <button id="applyFilters">Применить фильтры</button>
+        <button id="exportToPdf">Экспорт в PDF</button>
+    </div>
+</div>
+
+<div id="product-list">
+    <!-- Этот элемент js наполняет товарами -->
+</div>
+
+
+</body>
+</html>

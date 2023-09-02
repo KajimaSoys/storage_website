@@ -1,0 +1,90 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap');
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f2f2f2;
+}
+
+form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+label {
+    display: block;
+    color: #555555;
+}
+
+input, select {
+    width: 94%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    color: #555555;
+}
+
+select {
+    width: 100%;
+}
+
+.button-container{
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.1s ease-in-out;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+#exportToPdf {
+    background-color: #e81e37;
+}
+
+
+#exportToPdf:hover {
+    background-color: #be1226;
+}
+
+
+#product-list{
+    padding-bottom: 40px;
+}
+
+.product-card {
+    border: 1px solid #ccc;
+    padding: 15px;
+    margin-top: 40px;
+    border-radius: 5px;
+    background-color: #fff;
+    width: 335px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.product-param {
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.no-products{
+    margin-top: 40px;
+}

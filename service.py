@@ -18,13 +18,13 @@ class Product(BaseModel):
     manufacturer: str
 
 
-def db_insert(product):
+def product_insert(product):
     try:
         with get_cursor() as cursor:
             cursor.execute("""
                     INSERT INTO products (name, type, price, date, weight, height, width, depth, manufacturer)
                     VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
-                """, product.model_dump().values()) 
+                """, tuple(product.model_dump().values()))
         logger.info("Product created successfully!")
         return True
     except Exception:
@@ -32,34 +32,41 @@ def db_insert(product):
         return False
 
 
-def db_select(name, type, manufacturer, min_price, max_price, min_weight, max_weight):
+def product_select(name, type, manufacturer, min_price, max_price):
     with get_cursor() as cursor:
         query = "SELECT * FROM products WHERE TRUE"
         params = []
 
         if name:
-            query += " AND name=%s"
-            params.append(name.lower())
+            query += " AND name ILIKE %s"
+            params.append(f"%{name.lower()}%")
         if type:
-            query += " AND type=%s"
-            params.append(type.lower())
+            query += " AND type ILIKE %s"
+            params.append(f"%{type.lower()}%")
         if manufacturer:
-            query += " AND manufacturer=%s"
-            params.append(manufacturer.lower())
-        if min_price is not None:
+            query += " AND manufacturer ILIKE %s"
+            params.append(f"%{manufacturer.lower()}%")
+        if min_price:
             query += " AND price>=%s"
             params.append(min_price)
-        if max_price is not None:
+        if max_price:
             query += " AND price<=%s"
             params.append(max_price)
-        if min_weight is not None:
-            query += " AND weight>=%s"
-            params.append(min_weight)
-        if max_weight is not None:
-            query += " AND weight<=%s"
-            params.append(max_weight)
 
         cursor.execute(query, params)
         products = cursor.fetchall()
 
+        columns = [desc[0] for desc in cursor.description]
+        products = [dict(zip(columns, row)) for row in products]
+
     return products
+
+
+def get_options(column_name):
+    with get_cursor() as cursor:
+        query = f"SELECT DISTINCT {column_name} FROM products"
+        cursor.execute(query)
+        unique_values = cursor.fetchall()
+
+        unique_values = [value[0] for value in unique_values]
+    return unique_values

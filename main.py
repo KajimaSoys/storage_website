@@ -1,6 +1,9 @@
 from fastapi import FastAPI, Query
-from service import Product, db_insert, db_select
+from fastapi.staticfiles import StaticFiles
+
+from service import Product, product_insert, product_select, get_options
 from repository import init_db, close_db, init_table
+
 import logging
 
 app = FastAPI()
@@ -27,12 +30,7 @@ def shutdown_event():
 
 @app.post("/product/")
 def create_product(product: Product):
-    # Конвертация всех строковых данных в нижний регистр
-    product.name = product.name.lower()
-    product.type = product.type.lower()
-    product.manufacturer = product.manufacturer.lower()
-
-    if db_insert(product):
+    if product_insert(product):
         return {"message": "Product created successfully"}
     else:
         return {"message": "An error occurred on product creation"}
@@ -43,11 +41,24 @@ def get_products(
         name: str = Query(None),
         type: str = Query(None),
         manufacturer: str = Query(None),
-        min_price: float = Query(None),
-        max_price: float = Query(None),
-        min_weight: float = Query(None),
-        max_weight: float = Query(None)
+        min_price: str = Query(None),
+        max_price: str = Query(None)
 ):
-    products = db_select(name, type, manufacturer, min_price, max_price, min_weight, max_weight)
+    products = product_select(name, type, manufacturer, min_price, max_price)
 
     return products
+
+
+@app.get("/types/")
+def get_unique_types():
+    types = get_options("type")
+    return {"types": types}
+
+
+@app.get("/manufacturers/")
+def get_unique_manufacturers():
+    manufacturers = get_options("manufacturer")
+    return {"manufacturers": manufacturers}
+
+
+app.mount("/static", StaticFiles(directory="static"), name="static")
