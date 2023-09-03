@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+  fastapi:
+    build: .
+    container_name: fastapi
+    networks:
+      - storage_network
+    ports:
+      - "8000:8000"
+
+  nginx:
+    build: ./nginx
+    container_name: nginx
+    networks:
+      - storage_network
+    depends_on:
+      - fastapi
+    ports:
+      - "80:80"
+
+networks:
+  storage_network:
+    driver: bridge
