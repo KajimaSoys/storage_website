@@ -27,7 +27,13 @@ CREATE DATABASE storage_db;
 ```shell
 python -m venv venv
 ```
-#### 5. Установите необходимые библиотеки
+
+#### 5. Запуск виртуального окружения
+```shell
+ .\venv\Scripts\activate
+```
+
+#### 6. Установите необходимые библиотеки
 ```shell
 pip install -r req.txt
 ```
