@@ -21,4 +21,4 @@ services:
 
 networks:
   storage_network:
-    driver: bridge
+    external: true

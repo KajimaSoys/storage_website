@@ -61,4 +61,4 @@ def get_unique_manufacturers():
     return {"manufacturers": manufacturers}
 
 
-app.mount("/static", StaticFiles(directory="static"), name="static")
+app.mount("/", StaticFiles(directory="static"), name="static")

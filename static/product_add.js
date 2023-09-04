@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function() {
         };
 
         // Отправляем POST запрос
-        fetch("http://127.0.0.1:8000/product/", {
+        fetch("http://45.12.72.104/product/", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

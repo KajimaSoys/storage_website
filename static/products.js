@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Запрос товаров
     function fetchProducts(filters = {}) {
-        let url = "http://127.0.0.1:8000/products/";
+        let url = "http://45.12.72.104/products/";
 
         if (Object.keys(filters).length > 0) {
             const queryParams = new URLSearchParams(filters);
@@ -128,7 +128,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Наполнение фильтров
     function fetchUniqueValues(endpoint, elementId) {
-        fetch(`http://127.0.0.1:8000/${endpoint}/`)
+        fetch(`http://45.12.72.104/${endpoint}/`)
             .then(response => response.json())
             .then(data => {
                 const selectElement = document.getElementById(elementId);
